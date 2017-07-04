@@ -9,7 +9,7 @@
 	body {margin: 0px;padding: 0px;}
 	.vessel {overflow: hidden;}
 	#div1 {position:absolute;overflow:hidden;}
-	#div_move {position: absolute;}
+	#div_move {position: absolute;top: -678px;}
 	#div3 {position: fixed;width: 100px;height: 200px;top: 200px;background: #92989b;}
 </style>
 <script>
@@ -42,19 +42,17 @@ $(Element).ready(function(){
 	
 	
 //鼠标滚动控制页面
-	var i=0;
-	var l=0;
 	function move(event)
 	{
 		if(event.wheelDelta)				//火狐滚动
 			{
 				if(event.wheelDelta>0)
 				{
-					for(var k=0;k<odiv.length;k++)
-						{
-							alert("kk");
-							if(odiv[k].offsetTop===0) {alert(k);}
-						}
+					var i=odiv_move.offsetTop;
+					var l=-i/oheight;
+					l++;
+					odiv_move.style.top=-oheight*l+"px";
+					
 				}
 				if(event.wheelDelta<0)
 				{
