@@ -50,7 +50,11 @@ $(Element).ready(function(){
 			{
 				if(event.wheelDelta>0)
 				{
-					
+					for(var k=0;k<odiv.length;k++)
+						{
+							alert("kk");
+							if(odiv[k].offsetTop===0) {alert(k);}
+						}
 				}
 				if(event.wheelDelta<0)
 				{
