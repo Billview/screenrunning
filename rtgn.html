@@ -43,7 +43,7 @@ $(Element).ready(function(){
 	
 //鼠标滚动控制页面
 	var i=0;
-
+	var l=0;
 	function move(event)
 	{
 		if(event.wheelDelta)				//IE chcome鼠标滚动切换页面
@@ -54,22 +54,23 @@ $(Element).ready(function(){
 					var j=i%10;		//减缓鼠标滚动速度
 					if (0 === j)
 					{
-						for(var k=0;k<ojpg.length;k++)
+						for(var k=0;k<odiv.length;k++)
 							{
-								if(ojpg[k].offsetTop===0)
+								if(odiv[k].offsetTop===0)
 									{
 										var l=k;
 										l++;
+										odiv_move.style.top = -odiv[0].offsetHeight * l + "px";
 									}
 							}
-                        if (l < 6)
+                        /*if (l < 6)
                         {
                             odiv_move.style.top = -odiv[0].offsetHeight * l + "px";
                         }
                         else {
                             l = 6;
                             odiv_move.style.top = -odiv[0].offsetHeight * 5 + "px";
-                        }
+                        }*/
                     }
 				}
 				if(event.wheelDelta<0)
@@ -90,20 +91,24 @@ $(Element).ready(function(){
 			}
 		else if (event.detail)				//火狐浏览器鼠标滚动切换页面
         {
-            if (event.detail < 0) {
-                i++;
-                var j = i % 10;
-                if (0 === j) {
-                    l++;
-                    if (l < 6) {
-                        odiv_move.style.top = -odiv[0].offsetHeight * l + "px";
-                    }
-                    else {
-                        l = 6;
-                        odiv_move.style.top = -odiv[0].offsetHeight * 5 + "px";
-                    }
-                }
-            }
+            if (event.detail < 0) 
+				{
+					i++;
+					var j = i % 10;
+					if (0 === j) 
+						{
+							l++;
+							if (l < 6) 
+							{
+								odiv_move.style.top = -odiv[0].offsetHeight * l + "px";
+							}
+							else 
+							{
+								l = 6;
+								odiv_move.style.top = -odiv[0].offsetHeight * 5 + "px";
+							}
+						}
+				}
             if (event.detail > 0) {
                 i++;
                 var j = i % 10;
