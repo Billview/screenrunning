@@ -43,7 +43,7 @@ $(Element).ready(function(){
 	
 //鼠标滚动控制页面
 	var i=0;
-	var l=0;
+
 	function move(event)
 	{
 		if(event.wheelDelta)				//IE chcome鼠标滚动切换页面
@@ -54,7 +54,14 @@ $(Element).ready(function(){
 					var j=i%10;		//减缓鼠标滚动速度
 					if (0 === j)
 					{
-                        l++;
+						for(var k=0;k<ojpg.length;k++)
+							{
+								if(ojpg[k].offsetTop===0)
+									{
+										var l=k;
+										l++;
+									}
+							}
                         if (l < 6)
                         {
                             odiv_move.style.top = -odiv[0].offsetHeight * l + "px";
