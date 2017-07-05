@@ -44,39 +44,34 @@ $(Element).ready(function(){
 //鼠标滚动控制页面
 	function move(event)
 	{
-		var i=odiv_move.offsetTop;
-		var l=-i/oheight;
-		clearInterval(timer);
+		function startmove(speed,end)
+		{
+			var timer;
+			setTimeout(timer);
+			var i=odiv_move.offsetTop;
+			var l=-i/oheight;
+			timer=setTimeout(function(){
+			l=l+speed;
+			if(l<end)
+				{
+					odiv_move.style.top=-oheight*l+"px";	
+				}
+			else
+				{
+					odiv_move.style.top=-oheight*end+"px";
+				}
+			},200);
+
+		}
 		if(event.wheelDelta)				//火狐滚动
 			{
 				if(event.wheelDelta>0)
 				{
-					var timer=setTimeout(function(){
-					l++;
-					if(l<5)
-						{
-							odiv_move.style.top=-oheight*l+"px";	
-						}
-					else
-						{
-							odiv_move.style.top=-oheight*5+"px";
-						}
-					},200);
-					
+					startmove(1,5);
 				}
 				if(event.wheelDelta<0)
 				{
-					var timer=setTimeout(function(){
-					l--;
-					if(l>0)
-						{
-							odiv_move.style.top=-oheight*l+"px";	
-						}
-					else
-						{
-							odiv_move.style.top=0+"px";
-						}
-					},200);
+					//startmove(-1,0);
 				}
 			}
 		/*
