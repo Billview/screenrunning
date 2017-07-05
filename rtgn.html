@@ -44,7 +44,7 @@ $(Element).ready(function(){
 //鼠标滚动控制页面
 	function move(event)
 	{
-		function startmove(speed,end)
+		function startmove(speed,end,condition)
 		{
 			var timer;
 			setTimeout(timer);
@@ -52,7 +52,7 @@ $(Element).ready(function(){
 			var l=-i/oheight;
 			timer=setTimeout(function(){
 			l=l+speed;
-			if(l<end)
+			if(eval(condition)===true)
 				{
 					odiv_move.style.top=-oheight*l+"px";	
 				}
@@ -61,57 +61,32 @@ $(Element).ready(function(){
 					odiv_move.style.top=-oheight*end+"px";
 				}
 			},200);
-
 		}
-		if(event.wheelDelta)				//火狐滚动
+		
+		if(event.wheelDelta)				//IE Chrome鼠标滚动
 			{
 				if(event.wheelDelta>0)
 				{
-					startmove(1,5);
+					startmove(1,5,'l<end');
 				}
 				if(event.wheelDelta<0)
 				{
-					//startmove(-1,0);
+					startmove(-1,0,"l>0");
 				}
 			}
-		/*
-		else if (event.detail)				//IE chrome鼠标滚动切换页面
+		
+		else if (event.detail)				//firefox鼠标滚动切换页面
         {
             if (event.detail < 0) 
 				{
-					i++;
-					var j = i % 2;
-					if (0 === j) 
-						{
-							l++;
-							if (l < 6) 
-							{
-								odiv_move.style.top = -odiv[0].offsetHeight * l + "px";
-							}
-							else 
-							{
-								l = 6;
-								odiv_move.style.top = -odiv[0].offsetHeight * 5 + "px";
-							}
-						}
+					startmove(1,5,'l<end');
 				}
-            if (event.detail > 0) {
-                i++;
-                var j = i % 10;
-                if (0 === j) {
-                    l--;
-                    if (l > 0) {
-                        odiv_move.style.top = -odiv[0].offsetHeight * l + "px";
-                    }
-                    else {
-                        l = 0;
-                        odiv_move.style.top = 0 + "px"
-                    }
-                }
-            }
-
+            if (event.detail > 0) 
+				{
+					startmove(-1,0,"l>0");
+				}	
         }
-		*/
+		
 		
 	}//函数结束
 //鼠标滚动控制页面结束位置
