@@ -9,7 +9,7 @@
 	body {margin: 0px;padding: 0px;}
 	.vessel {overflow: hidden;}
 	#div1 {position:absolute;overflow:hidden;}
-	#div_move {position: absolute;top: -678px;}
+	#div_move {position: absolute;top: 0px;}
 	#div3 {position: fixed;width: 100px;height: 200px;top: 200px;background: #92989b;}
 </style>
 <script>
@@ -44,19 +44,39 @@ $(Element).ready(function(){
 //鼠标滚动控制页面
 	function move(event)
 	{
+		var i=odiv_move.offsetTop;
+		var l=-i/oheight;
+		clearInterval(timer);
 		if(event.wheelDelta)				//火狐滚动
 			{
 				if(event.wheelDelta>0)
 				{
-					var i=odiv_move.offsetTop;
-					var l=-i/oheight;
+					var timer=setTimeout(function(){
 					l++;
-					odiv_move.style.top=-oheight*l+"px";
+					if(l<5)
+						{
+							odiv_move.style.top=-oheight*l+"px";	
+						}
+					else
+						{
+							odiv_move.style.top=-oheight*5+"px";
+						}
+					},200);
 					
 				}
 				if(event.wheelDelta<0)
 				{
-					
+					var timer=setTimeout(function(){
+					l--;
+					if(l>0)
+						{
+							odiv_move.style.top=-oheight*l+"px";	
+						}
+					else
+						{
+							odiv_move.style.top=0+"px";
+						}
+					},200);
 				}
 			}
 		/*
@@ -122,6 +142,6 @@ document.addEventListener("DOMMouseScroll",move,false);		//火狐注册鼠标滚
 		<div class="vessel"><img class="bgimg" src="6.jpg"></div>
 	</div>
 </div>
-<div id="div3">可可粉</div>
+<div id="div3">滚动条</div>
 </body>
 </html>
