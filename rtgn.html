@@ -93,19 +93,21 @@ $(Element).ready(function(){
 	document.onmousewheel=move;					//IE Chrome注册鼠标滚动事件
 	document.addEventListener("DOMMouseScroll",move,false);		//火狐注册鼠标滚动事件
 	var timer1=null;
-	function check()
+	var timer2=null;
+	function check(speed,end,condition,obj1)
 	{
-		startmove(1,5,"l<end");
-		if(odiv_move.offsetTop===-5*678)
+		startmove(speed,end,condition);
+		if(odiv_move.offsetTop===-5*oheight)
 			{
-				clearInterval(timer1);
+				clearInterval(obj1);
 				setTimeout(function(){
 					odiv_move.style.top=0+"px";
-					timer1=setInterval(check,5000);
-				},5000);
+					obj1=setInterval(function(){check(1,5,"l<end",timer1)},700);
+				},700);
 			}
 	}
-	timer1=setInterval(check,5000);
+	timer1=setInterval(function(){check(1,5,"l<end",timer1)},700);
+	//timer2=setInterval(check(-1,0,"l>0",timer2,timer1),700);
 	
 });//ready结束
 	
